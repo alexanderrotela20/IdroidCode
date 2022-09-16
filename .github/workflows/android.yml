@@ -28,14 +28,14 @@ jobs:
 
         with:
 
-          java-version: 11
+        java-version: 11
 
       - name: Change wrapper permissions
 
         run: chmod +x ./gradlew
 
-        - name: Run test
-        
+      - name: Run test
+
         run: ./gradlew test
 
       # Run Build Project
