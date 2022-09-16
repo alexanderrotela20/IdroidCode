@@ -1,0 +1,63 @@
+name: Generate APK Release
+
+on:
+
+  # Triggers the workflow on push or pull request events but only for default and protected branches
+
+  push:
+
+    branches: [ main ]
+
+  pull_request:
+
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - name: Set Up JDK
+
+        uses: actions/setup-java@v1
+
+        with:
+
+          java-version: 11
+
+      - name: Change wrapper permissions
+
+        run: chmod +x ./gradlew
+
+      # Run Build Project
+
+      - name: Build project
+
+        run: ./gradlew build
+
+
+      # Create APK Release
+ 
+      - name: Build release (APK)
+
+        run: ./gradlew assemble
+
+
+      # Upload Artifact Build
+
+      # Noted For Output [module-name]/build/outputs/
+
+      - name: Upload debug build APK
+
+        uses: actions/upload-artifact@v2
+
+        with:
+
+          name: App bundle(s) and APK(s) generated
+
+          path: app/build/outputs/ 
