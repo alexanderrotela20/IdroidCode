@@ -28,7 +28,7 @@ jobs:
 
         with:
 
-        java-version: 11
+          java-version: 11
 
       - name: Change wrapper permissions
 
