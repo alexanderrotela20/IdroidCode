@@ -56,7 +56,7 @@
      <string name="theme">Tema</string>
       <string name="follow_system">Por defecto</string>
     <string name="light_mode">Claro</string>
-    <string name="dark_mode">On</string>
+    <string name="dark_mode">Oscuro</string>
      <string name="appearance">Apariencia</string>
     
 </resources>
