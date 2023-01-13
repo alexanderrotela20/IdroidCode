@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Idroid Code</string>
+    <string name="resource">Recurso</string>
+    <string name="resource_manager">Administrador de recursos</string>
+    <string name="debug">Debug</string>
+    <string name="component_tree">Componentes</string>
+    <string name="raw_xml">Raw XML</string>
+     <string name="settings">Ajustes</string>
+    <string name="about">Acerca de</string>
+    <string name="ok">Ok</string>
+    <string name="run">Compilar</string>
+    <string name="mode">Modo</string>
+    <string name="design_surface">Capa de diseño</string>
+    <string name="view">Vista previa</string>
+    <string name="design">Diseño</string>
+    <string name="blueprint">Límite de diseño</string>
+    <string name="device_scope_format">La aplicación será compatible aproximadamente con %s de dispositivos android</string>
+    <string name="error_title">Ha ocurrido un error inesperado.\nLamentamos el inconveniente.</string>
+     <string name="mal_title_about">Acerca de</string>
+    <string name="mal_title_licenses">Licencias</string>
+
+    <string name="mal_close">Cerrar</string>
+    <string name="mal_send_email">Enviar email</string>
+
+    <string name="mal_activity_exception">No hay apps para ejecutar esta acción</string>
+    <string name="theme">Tema</string>
+
+      <string name="follow_system">Por defecto</string>
+
+    <string name="light_mode">Claro</string>
+
+    <string name="dark_mode">Oscuro</string>
+
+     <string name="appearance">Apariencia</string>
+	<string name="create">Crear</string>
+    <string name="delete">Eliminar proyecto</string>
+    
+</resources>
