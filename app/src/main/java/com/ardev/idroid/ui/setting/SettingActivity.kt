@@ -6,10 +6,10 @@ import com.google.android.material.appbar.AppBarLayout
 import androidx.appcompat.widget.Toolbar
 import com.ardev.idroid.R 
 import com.ardev.idroid.app.theme.DarkThemeHelper
-import com.ardev.idroid.base.BaseActivity
+import com.ardev.idroid.app.AppActivity
 import com.ardev.idroid.ext.addSystemWindowInsetToPadding
 
-class SettingActivity : BaseActivity() {
+class SettingActivity : AppActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

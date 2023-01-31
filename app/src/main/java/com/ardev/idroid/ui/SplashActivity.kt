@@ -6,9 +6,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import com.ardev.idroid.ui.home.HomeActivity
-import com.ardev.idroid.base.BasePermissionActivity
+import com.ardev.idroid.app.AppActivity
 
-class SplashActivity : BasePermissionActivity() {
+class SplashActivity : AppActivity() {
 
 	override fun onCreate(savedInstanceState : Bundle? ) {
 		super.onCreate(savedInstanceState)

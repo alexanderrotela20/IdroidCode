@@ -17,8 +17,8 @@ import com.ardev.idroid.ext.addSystemWindowInsetToPadding
 
 abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppActivity() {
 
-	private lateinit var binding: VB
-    protected abstract val viewModel: VM
+	protected lateinit var binding: VB
+    protected abstract val viewmodel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -30,15 +30,13 @@ import com.ardev.idroid.ui.main.adapter.FileListAdapter
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import com.ardev.idroid.ext.UtilKt
+import com.ardev.idroid.ext.*
 import com.ardev.idroid.app.MainViewModelProvider
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import android.view.animation.AnticipateInterpolator
-import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.core.graphics.Insets
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
@@ -168,7 +166,7 @@ else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file
       
 if (breadcrumbsCache.exists()) {
 	try {
-  val listBreadCrumb: List<BreadcrumbItem> =  JsonUtils.jsonToList(breadcrumbsCache.readText(), BreadcrumbItem::class.java)
+  val listBreadCrumb: ArrayList<BreadcrumbItem> =  JsonUtils.jsonToList(breadcrumbsCache.readText(), BreadcrumbItem::class.java)
    listBreadCrumb.forEach{binding.breadcrumbsView.addItem(it)}
 
 	} catch (e: Exception) {}

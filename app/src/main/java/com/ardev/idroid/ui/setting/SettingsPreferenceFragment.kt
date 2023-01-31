@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import com.takisoft.preferencex.PreferenceFragmentCompat
+import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.ardev.idroid.app.theme.DarkThemeHelper
 import com.ardev.idroid.app.theme.DarkTheme
