@@ -168,7 +168,7 @@ else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file
       
 if (breadcrumbsCache.exists()) {
 	try {
-  val listBreadCrumb: List<BreadcrumbItem> =  JsonUtils.jsonToList(breadcrumbsCache.readText(), BreadcrumbItem.class::java)
+  val listBreadCrumb: List<BreadcrumbItem> =  JsonUtils.jsonToList(breadcrumbsCache.readText(), BreadcrumbItem::class.java)
    listBreadCrumb.forEach{binding.breadcrumbsView.addItem(it)}
 
 	} catch (e: Exception) {}
@@ -187,7 +187,7 @@ if (breadcrumbsCache.exists()) {
      val currentPathCache = File("${viewmodel.fatherPath.value}/app/build/.cache", ".currentpath")
 if (currentPathCache.exists()) {
 	try {
-   _path =  Gson().fromJson(currentPathCache.readText(), String.class::java)
+   _path =  Gson().fromJson(currentPathCache.readText(), String::class.java)
    
 	} catch (e: Exception) {} 
 	} else {
@@ -224,7 +224,7 @@ if (currentPathCache.exists()) {
                  val positionFile = File("${viewmodel.fatherPath.value}/app/build/.cache", ".position")
 if (positionFile.exists()) {
 	try {
-  val pos: Int = Gson().fromJson(positionFile.readText(), Int.class::java)
+  val pos: Int = Gson().fromJson(positionFile.readText(), Int::class.java)
   binding.pager2.setCurrentItem(pos, false)
 		} catch (e: Exception) {} 
 		} else {
@@ -398,7 +398,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
      fun openProject(project: Project) {
         mIndexServiceConnection.setProject(project)
         viewmodel.setIndexing(true)
-        val intent = Intent(this@MainActivity, IndexService.class::java)
+        val intent = Intent(this@MainActivity, IndexService::class.java)
         startService(intent)
         bindService(intent, mIndexServiceConnection, Context.BIND_IMPORTANT)
     }
