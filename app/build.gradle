@@ -5,7 +5,7 @@ id 'kotlin-kapt'
 
     }
 android {
-
+	namespace 'com.ardev.idroid'
     compileSdkVersion 33
     
 
