@@ -28,7 +28,7 @@ public class Decompress {
         }
     }
 
-    @SuppressWarnings("unused")
+   
     public static void unzip(String zipFile, String location) {
         try (FileInputStream fin = new FileInputStream(zipFile)) {
             unzip(fin, location);

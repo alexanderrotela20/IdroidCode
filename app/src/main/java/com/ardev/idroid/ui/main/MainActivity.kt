@@ -72,7 +72,6 @@ import java.io.File
 import androidx.viewpager2.widget.CompositePageTransformer
 import com.ardev.component.widget.breadcrumbs.DefaultBreadcrumbsCallback
 import com.google.android.material.tabs.TabLayout
-import com.ardev.f.storage.Storage
 import com.ardev.component.widget.breadcrumbs.model.BreadcrumbItem
 import com.ardev.idroid.R
 
@@ -165,7 +164,7 @@ else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file
  	viewModel.fatherPath.observe(this) { fatherPath -> 
        	supportActionBar.setTitle(File(fatherPath).getName())
        		
-      val breadcrumbsCache = File("$fatherPath/app/build/.cache", ".breadcrumbs")
+      val breadcrumbsCache = File("${fatherPath}/app/build/.cache", ".breadcrumbs")
       
 if (breadcrumbsCache.exists()) {
 	try {
@@ -185,7 +184,7 @@ if (breadcrumbsCache.exists()) {
 	var _path: String = null
 	if(firstTimeInitList) {
                 firstTimeInitList = false
-     val currentPathCache = File(viewModel.fatherPath.value + "/app/build/.cache", ".currentpath")
+     val currentPathCache = File("${viewModel.fatherPath.value}/app/build/.cache", ".currentpath")
 if (currentPathCache.exists()) {
 	try {
    _path =  Gson().fromJson(currentPathCache.readText(), String.class::java)
@@ -222,7 +221,7 @@ if (currentPathCache.exists()) {
                 .observe(this) { position -> 
                 if(firstTimeInitTab) {
                 firstTimeInitTab = false
-                 val positionFile = File(viewModel.fatherPath.value + "/app/build/.cache", ".position")
+                 val positionFile = File("${viewModel.fatherPath.value}/app/build/.cache", ".position")
 if (positionFile.exists()) {
 	try {
   val pos: Int = Gson().fromJson(positionFile.readText(), Int.class::java)
@@ -264,9 +263,8 @@ private fun getPath(depth: Int): String {
    
     Executors.newSingleThreadExecutor().execute(() -> {
     
-        List<File> list = st.getFiles(path)
+       val list = File(path).listFiles().toList()
          
-          
        runOnUiThread(() -> {
      
 	
@@ -403,7 +401,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
      fun openProject(project: Project) {
         mIndexServiceConnection.setProject(project)
         viewModel.setIndexing(true)
-        val intent = Intent(this@MainActivity, IndexService::class.java)
+        val intent = Intent(this@MainActivity, IndexService.class::java)
         startService(intent)
         bindService(intent, mIndexServiceConnection, Context.BIND_IMPORTANT)
     }
