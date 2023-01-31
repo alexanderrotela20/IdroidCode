@@ -96,18 +96,18 @@ var firstTimeInitList = true
 		super.onCreate(bundle)
 	MainViewModelProvider.init(viewModel)
 	
-	 project = Project(ProjectProvider.getRootFile()) 
+	 project = ProjectProvider.getProject()
 	 mProjectManager = ProjectManager.getInstance()
      mProjectManager.addOnProjectOpenListener(this@MainActivity)
 	  mIndexServiceConnection = IndexServiceConnection(viewModel)
     
-		init()
+		initView()
 		viewModel.setFatherPath(project.getRootFile().getPath())
 		
 	if (!project.equals(mProjectManager.getCurrentProject())) openProject(project)
 	}
 	
-	private fun init() {
+	private fun initView() {
 	with(binding) {
 navView.addSystemWindowInsetToPadding(false, false, false, false)
 pager2.addSystemWindowInsetToMargin(false, false, false, false)
@@ -116,8 +116,7 @@ pager2.addInsetTypeImeToPadding()
 	setSupportActionBar(toolbar)
 	supportActionBar.setDisplayHomeAsUpEnabled(true)
 	
-		val toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this@MainActivity, drawer, toolbar, R.string.app_name, R.string.app_name)
-	
+		val toggle = ActionBarDrawerToggle(this@MainActivity, drawer, toolbar, R.string.app_name, R.string.app_name)
 		toggle.syncState()
 		toggle.setDrawerSlideAnimationEnabled(true)
 		drawer.addDrawerListener(toggle)
@@ -152,8 +151,8 @@ drawer.closeDrawer(GravityCompat.START)
 
 mFilesAdapter.setOnLongClickListener { v, file -> 
 
-if (file.isDirectory()) showOptionsMenu(v, file)
-else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file)  || ProjectUtils.isDrawableXMLFile(file)) && file.isFile()) showFilesMenu(v, file)
+if (file.isDirectory()) showFolderOptionsMenu(v, file)
+else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file)  || ProjectUtils.isDrawableXMLFile(file)) && file.isFile()) showFileOptionsMenu(v, file)
 
 }
  }
@@ -166,11 +165,11 @@ else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file
  	viewModel.fatherPath.observe(this) { fatherPath -> 
        	supportActionBar.setTitle(File(fatherPath).getName())
        		
-      val breadcrumbs = File(fatherPath + "/app/build/.cache", ".breadcrumbs")
+      val breadcrumbsCache = File("$fatherPath/app/build/.cache", ".breadcrumbs")
       
-if (breadcrumbs.exists()) {
+if (breadcrumbsCache.exists()) {
 	try {
-  val listBreadCrumb: List<BreadcrumbItem> =  JsonUtils.jsonToList(breadcrumbs.readText(), BreadcrumbItem.class::java)
+  val listBreadCrumb: List<BreadcrumbItem> =  JsonUtils.jsonToList(breadcrumbsCache.readText(), BreadcrumbItem.class::java)
    listBreadCrumb.forEach{binding.breadcrumbsView.addItem(it)}
 
 	} catch (e: Exception) {}
@@ -288,7 +287,7 @@ private fun getPath(depth: Int): String {
 	})
 	}
 
-private fun showOptionsMenu(view: View, file: File) {
+private fun showFolderOptionsMenu(view: View, file: File) {
    
     val chars: Array<CharSequence> = arrayOf("Compartir", "Borrar")
 	
@@ -301,7 +300,7 @@ private fun showOptionsMenu(view: View, file: File) {
 		 dialog.show()
         
     }
-private fun showFilesMenu(view: View, file: File) {
+private fun showFileOptionsMenu(view: View, file: File) {
    
      val chars: Array<CharSequence> = arrayOf("Vista Previa", "Editar")
     
@@ -360,38 +359,35 @@ private fun showFilesMenu(view: View, file: File) {
     
     
 		
-   mPagerAdapter = new PageAdapter(getSupportFragmentManager(), getLifecycle())
+   mPagerAdapter = new PageAdapter(supportFragmentManager, lifecycle)
         v.pager2.setAdapter(mPagerAdapter)
         v.pager2.setUserInputEnabled(false)
-		v.pager2.setPageTransformer((view, position) -> {
+		v.pager2.setPageTransformer { view, position -> 
 		view.setAlpha(0.2f)
 		view.setVisibility(View.VISIBLE)
 		view.animate().alpha(1.0f).setDuration(view.getResources().getInteger(android.R.integer.config_shortAnimTime))
-		})
+		}
         
-        v.tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+        v.tab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener() {
+            override fun onTabUnselected(tab: TabLayout.Tab) {
                 
             }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            override fun onTabReselected(tab: TabLayout.Tab) {
            showTabMenu(tab)
                
             }
 
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            override fun onTabSelected(tab: TabLayout.Tab) {
                mainViewModel.setCurrentTabPosition(tab.getPosition())
 
             }
         })
 		
-        new TabLayoutMediator(v.tab, v.pager2, true, false, (tab, i) -> {
-			boolean isPreview = mainViewModel.getListEditor().getValue().get(i).isPreview()
+       TabLayoutMediator(v.tab, v.pager2, true, false, (tab, i) -> {
+			val isPreview = mainViewModel.getListEditor().getValue().get(i).isPreview()
 
-			String fileName = mainViewModel.getListEditor().getValue().get(i).getFile().getName()
+			val fileName = mainViewModel.getListEditor().getValue().get(i).getFile().getName()
 			
 			tab.setText(fileName)
         	if(isPreview) tab.setIcon(R.drawable.ic_preview)
@@ -412,7 +408,7 @@ private fun showFilesMenu(view: View, file: File) {
         bindService(intent, mIndexServiceConnection, Context.BIND_IMPORTANT)
     }
     
-     override public void onProjectOpen(Project project) {
+     override fun onProjectOpen(project: Project) {
     
     
     }
@@ -428,35 +424,30 @@ private fun showFilesMenu(view: View, file: File) {
 	
 	
 
-	  private void bkpListBreadcrumb(List<IBreadcrumbItem> bList) {
+	  private fun bkpListBreadcrumb(bList: List<IBreadcrumbItem>) {
    try {
-         File bciFile = new File(mainViewModel.getFatherPath().getValue() + "/app/build/.cache", ".breadcrumbs")
-         String content  = new GsonBuilder()
+        val bciFile = File("${mainViewModel.fatherPath.value}/app/build/.cache", ".breadcrumbs")
+         val content  = GsonBuilder()
                 .setPrettyPrinting()
                 .create()
-                .toJson( bList,new TypeToken<List<BreadcrumbItem>>(){}.getType())
+                .toJson( bList, TypeToken<List<BreadcrumbItem>>(){}.type)
         
         if(!bciFile.exists()) bciFile.createNewFile()
 		if(!bList.isEmpty()){
-        FileUtils.writeStringToFile(bciFile,
-                 content,
-                 Charset.defaultCharset())
+       bciFile.writeText(content)
                  }
-                 } catch (Exception e) {}
+                 } catch (e: Exception) {}
    
    }
    
-   private void bkpCurrentPath(String path) {
+   private fun bkpCurrentPath(path: String) {
    try {
-         File pathFile= new File(mainViewModel.getFatherPath().getValue() + "/app/build/.cache", ".currentpath")
+         val pathFile =  File(${mainViewModel.fatherPath.value}/app/build/.cache", ".currentpath")
         
         if(!pathFile.exists()) pathFile.createNewFile()
-		
-        FileUtils.writeStringToFile(pathFile,
-                 new Gson().toJson(path) ,
-                 Charset.defaultCharset())
-                 
-                 } catch (Exception e) {}
+		pathFile.writeText(Gson().toJson(path))
+       
+                 } catch (e: Exception) {}
    
    
          }

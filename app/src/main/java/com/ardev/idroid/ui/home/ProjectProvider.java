@@ -6,21 +6,20 @@ import androidx.annotation.NonNull;
 import java.io.File;
 import com.ardev.builder.project.Project;
 
-/**
- * Utility class to retrieve the application context from anywhere.
- */
+
 public class ProjectProvider {
 
-    private static File root;
+    private static Project project;
 
     public static void init(@NonNull Project project) {
-        root = project.getRootFile();
+        this.project = project;
     }
 
-    public static File getRootFile() {
-        if (root == null) {
+    public static Project getProject() {
+        if (project == null) {
             throw new IllegalStateException("init() has not been called yet in ProjectManager.class ");
         }
-        return root;
+        return project;
+
     }
 }

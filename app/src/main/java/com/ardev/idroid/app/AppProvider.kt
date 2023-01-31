@@ -14,4 +14,6 @@ object AppProvider {
     fun getApplicationContext() : Context {
         if(!this::mContext.isInitialized) throw IllegalStateException("init() has not been called yet in AppProvider.class")
         return mContext
+
+    }
     }
