@@ -379,7 +379,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
             }
         })
 		
-       TabLayoutMediator(v.tab, v.pager2, true, false, (tab, i) -> {
+       TabLayoutMediator(binding.tab, binding.pager2, true, false) { tab, i -> 
 			val isPreview = viewmodel.getListEditor().value.get(i).isPreview()
 
 			val fileName = viewmodel.getListEditor().value.get(i).getFile().name
@@ -388,7 +388,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
         	if(isPreview) tab.setIcon(R.drawable.ic_preview)
         	 
         	
-        }).attach()
+        }.attach()
     
     
     
