@@ -21,7 +21,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.ardev.idroid.ext.CoroutineUtil
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class IdroidApplication: Application() {
 
  

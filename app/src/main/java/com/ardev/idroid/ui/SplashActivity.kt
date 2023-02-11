@@ -12,20 +12,10 @@ class SplashActivity : AppActivity() {
 
 	override fun onCreate(savedInstanceState : Bundle? ) {
 		super.onCreate(savedInstanceState)
+		cambiarActivity(this, HomeActivity::class.java)
 		
 	}
     
     
-    
-    override fun onPermissionsGranted() {
   
-  //	Handler.postDelayed( () -> {
-               cambiarActivity(this, HomeActivity::class.java)
-      //      }, 500)
-  
-  
-  }
-  
-    
-    
 }

@@ -55,7 +55,7 @@ requireActivity().addMenuProvider( object: MenuProvider {
 	}
 
 	protected fun setMenu(menu: Menu) {}
-	protected fun observeViewModel() {}
+	protected open fun observeViewModel() {}
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
 

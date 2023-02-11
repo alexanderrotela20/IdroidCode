@@ -1,4 +1,4 @@
-package com.ardev.idroid.commons
+package com.ardev.idroid.common
 
 import android.text.Editable
 import android.text.TextWatcher

@@ -73,7 +73,7 @@ import com.google.android.material.tabs.TabLayout
 import com.ardev.component.widget.breadcrumbs.model.BreadcrumbItem
 import com.ardev.idroid.R
 
-class MainActivity: BaseActivity<ActivityMainBinding, MainViewModel>(), ProjectManager.OnProjectOpenListener {
+class MainActivity(): BaseActivity<ActivityMainBinding, MainViewModel>(), ProjectManager.OnProjectOpenListener {
 	
 	
 private lateinit var mFilesAdapter: FileListAdapter 
@@ -86,20 +86,20 @@ var firstTimeInitTab = true
 var firstTimeInitList = true
 
 	
-	override val viewmodel: MainViewModel by viewModels
+	override val viewModel: MainViewModel by viewModels
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
 	override fun onCreate(bundle: Bundle) {
 		super.onCreate(bundle)
-	MainViewModelProvider.init(viewmodel)
+	MainViewModelProvider.init(viewModel)
 	
 	 project = ProjectProvider.getProject()
 	 mProjectManager = ProjectManager.getInstance()
      mProjectManager.addOnProjectOpenListener(this@MainActivity)
-	  mIndexServiceConnection = IndexServiceConnection(viewmodel)
+	  mIndexServiceConnection = IndexServiceConnection(viewModel)
     
 		initView()
-		viewmodel.setFatherPath(project.getRootFile().path)
+		viewModel.setFatherPath(project.getRootFile().path)
 		
 	if (!project.equals(mProjectManager.getCurrentProject())) openProject(project)
 	}
@@ -119,7 +119,7 @@ pager2.addInsetTypeImeToPadding()
 		drawer.addDrawerListener(toggle)
 		
 		breadcrumbsView.setCallback { item, position -> 
-		viewmodel.setCurrentPath(getPath(position))
+		viewModel.setCurrentPath(getPath(position))
 		 bkpListBreadcrumb(breadcrumbsView.getItems())
 		
 	}
@@ -138,10 +138,10 @@ mFilesAdapter = FileListAdapter()
 	}
 mFilesAdapter.setOnClickListener { view, file -> 
 			 if (file.isDirectory()) {
-  	viewmodel.addBreadcrumbItem(file.path)
-	viewmodel.setCurrentPath(file.path)
+  	viewModel.addBreadcrumbItem(file.path)
+	viewModel.setCurrentPath(file.path)
 		} else {
-	viewmodel.addEditor(Editable(file, false))
+	viewModel.addEditor(Editable(file, false))
 drawer.closeDrawer(GravityCompat.START)
 }
 }
@@ -159,7 +159,7 @@ else if((ProjectUtils.isLayoutXMLFile(file) || ProjectUtils.isValuesXMLFile(file
  
 		override fun observeViewModel() {
  	
- 	viewmodel.fatherPath.observe(this) { fatherPath -> 
+ 	viewModel.fatherPath.observe(this) { fatherPath -> 
        	supportActionBar.setTitle(File(fatherPath).name)
        		
       val breadcrumbsCache = File("${fatherPath}/app/build/.cache", ".breadcrumbs")
@@ -178,11 +178,11 @@ if (breadcrumbsCache.exists()) {
 	}
             }
             
-	viewmodel.currentPath.observe(this) { path -> 
+	viewModel.currentPath.observe(this) { path -> 
 	var _path: String = null
 	if(firstTimeInitList) {
                 firstTimeInitList = false
-     val currentPathCache = File("${viewmodel.fatherPath.value}/app/build/.cache", ".currentpath")
+     val currentPathCache = File("${viewModel.fatherPath.value}/app/build/.cache", ".currentpath")
 if (currentPathCache.exists()) {
 	try {
    _path =  Gson().fromJson(currentPathCache.readText(), String::class.java)
@@ -201,25 +201,25 @@ if (currentPathCache.exists()) {
 	
 	
 	
-	viewmodel.breadcrumbItem.observe(this) { file -> 
-		val breadcrumbItem = BreadcrumbItem(viewmodel.listDir().value)
+	viewModel.breadcrumbItem.observe(this) { file -> 
+		val breadcrumbItem = BreadcrumbItem(viewModel.listDir().value)
 		breadcrumbItem.setSelectedItem(file.name)
   binding.breadcrumbsView.addItem(breadcrumbItem)
   bkpListBreadcrumb(binding.breadcrumbsView.getItems())
 	}
 		
-	viewmodel.listEditor
+	viewModel.listEditor
                 .observe(this) { files -> 
                 
                     mPagerAdapter.submitList(files)
                     binding.tab.setVisibility( if(files.isEmpty()) View.GONE else View.VISIBLE)
                 }
                 
-   viewmodel.currentTabPosition
+   viewModel.currentTabPosition
                 .observe(this) { position -> 
                 if(firstTimeInitTab) {
                 firstTimeInitTab = false
-                 val positionFile = File("${viewmodel.fatherPath.value}/app/build/.cache", ".position")
+                 val positionFile = File("${viewModel.fatherPath.value}/app/build/.cache", ".position")
 if (positionFile.exists()) {
 	try {
   val pos: Int = Gson().fromJson(positionFile.readText(), Int::class.java)
@@ -235,12 +235,12 @@ if (positionFile.exists()) {
                }
                  }
                  
-    viewmodel.isIndexing
+    viewModel.isIndexing
                 .observe(this) { indexing -> 
                    
                 }
                 
-        viewmodel.currentState
+        viewModel.currentState
                 .observe(this) { message -> 
                 supportActionBar.setSubtitle(message) 
                 
@@ -249,7 +249,7 @@ if (positionFile.exists()) {
 		
 private fun getPath(depth: Int): String {
 	if (depth == -1) depth = binding.breadcrumbsView.getItems().size() - 1
-	val sbPath =  StringBuffer(viewmodel.fatherPath.value)
+	val sbPath =  StringBuffer(viewModel.fatherPath.value)
 	for (i in 1..depth) {
 		
 		sbPath.append("/").append(v.breadcrumbsView.getItems().get(i).getSelectedItem())
@@ -274,7 +274,7 @@ private fun getPath(depth: Int): String {
                 binding.scrollingView.setVisibility(View.VISIBLE)
                 binding.emptyItem.setVisibility(View.GONE)
                  mFilesAdapter.setList(list)
-        viewmodel.setListCurrent(list)
+        viewModel.setListCurrent(list)
         }
         
             
@@ -305,11 +305,11 @@ private fun showFileOptionsMenu(view: View, file: File) {
 		dialog.setItems(chars) { d, item -> 
 		when (item) {
 		 0 -> {
-		viewmodel.addEditor(Editable(file, true))
+		viewModel.addEditor(Editable(file, true))
 		binding.drawer.closeDrawer(GravityCompat.START)
 			}
 		1 -> {
-		viewmodel.addEditor(Editable(file, false))
+		viewModel.addEditor(Editable(file, false))
 		binding.drawer.closeDrawer(GravityCompat.START)
 			}
 		}
@@ -320,7 +320,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
     }
     
    private fun showTabMenu(tab: TabLayout.Tab) {
-   val editable: Editable = viewmodel.listEditor.value.get(tab.getPosition())
+   val editable: Editable = viewModel.listEditor.value.get(tab.getPosition())
   val isPreview = editable.isPreview()
    
    val menu =  PopupMenu(this, tab.view)
@@ -333,9 +333,9 @@ private fun showFileOptionsMenu(view: View, file: File) {
 		menu.setOnMenuItemClickListener{ item -> 
 			 when (item.getTitle().toString()) {
 
-	 "Cerrar" -> viewmodel.closeEditor(editable)
-	"Cerrar otros" -> viewmodel.closeOthersEditor(editable)
-	"Cerrar todos" -> viewmodel.closeAllEditor()
+	 "Cerrar" -> viewModel.closeEditor(editable)
+	"Cerrar otros" -> viewModel.closeOthersEditor(editable)
+	"Cerrar todos" -> viewModel.closeAllEditor()
 						
 					 }
 					 
@@ -372,15 +372,15 @@ private fun showFileOptionsMenu(view: View, file: File) {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab) {
-               viewmodel.setCurrentTabPosition(tab.getPosition())
+               viewModel.setCurrentTabPosition(tab.getPosition())
 
             }
         })
 		
        TabLayoutMediator(binding.tab, binding.pager2, true, false) { tab, i -> 
-			val isPreview = viewmodel.getListEditor().value.get(i).isPreview()
+			val isPreview = viewModel.getListEditor().value.get(i).isPreview()
 
-			val fileName = viewmodel.getListEditor().value.get(i).getFile().name
+			val fileName = viewModel.getListEditor().value.get(i).getFile().name
 			
 			tab.setText(fileName)
         	if(isPreview) tab.setIcon(R.drawable.ic_preview)
@@ -395,7 +395,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
     
      fun openProject(project: Project) {
         mIndexServiceConnection.setProject(project)
-        viewmodel.setIndexing(true)
+        viewModel.setIndexing(true)
         val intent = Intent(this@MainActivity, IndexService::class.java)
         startService(intent)
         bindService(intent, mIndexServiceConnection, Context.BIND_IMPORTANT)
@@ -419,7 +419,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
 
 	  private fun bkpListBreadcrumb(bList: List<IBreadcrumbItem>) {
    try {
-        val bciFile = File("${viewmodel.fatherPath.value}/app/build/.cache", ".breadcrumbs")
+        val bciFile = File("${viewModel.fatherPath.value}/app/build/.cache", ".breadcrumbs")
          val content  = GsonBuilder()
                 .setPrettyPrinting()
                 .create()
@@ -435,7 +435,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
    
    private fun bkpCurrentPath(path: String) {
    try {
-         val pathFile =  File("${viewmodel.fatherPath.value}/app/build/.cache", ".currentpath")
+         val pathFile =  File("${viewModel.fatherPath.value}/app/build/.cache", ".currentpath")
         
         if(!pathFile.exists()) pathFile.createNewFile()
 		pathFile.writeText(Gson().toJson(path))
