@@ -429,7 +429,7 @@ private fun showFileOptionsMenu(view: View, file: File) {
 		if(!bList.isEmpty()){
        bciFile.writeText(content)
                  }
-                 } catch (e: Exception) {}
+                 } catch (ee: Exception) {}
    
    }
    
