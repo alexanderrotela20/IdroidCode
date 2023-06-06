@@ -7,3 +7,14 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    compileSdk = 33
+    buildTools = '33.0.0'
+    targetSdk = 33
+    minSdk = 26
+    appId = "com.ardev.idroid"
+    appnamespace = 'com.ardev.idroid'
+    versionCode = 1
+    versionName = "1.0 beta"
+}

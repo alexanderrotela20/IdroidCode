@@ -7,7 +7,7 @@
      android:layout_marginTop="8dp"
      android:layout_marginStart="8dp"
      android:layout_marginEnd="8dp"
-      app:cardCornerRadius="16dp"
+      app:cardCornerRadius="8dp"
      app:cardUseCompatPadding="false"
      android:clickable="true" 
      android:focusable="true" 

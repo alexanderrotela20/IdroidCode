@@ -5,17 +5,17 @@ id 'kotlin-kapt'
 
     }
 android {
-	namespace 'com.ardev.idroid'
-    compileSdkVersion 33
+	namespace rootProject.ext.appnamespace
+    compileSdk rootProject.ext.compileSdk
     
 
 
     defaultConfig {
-        applicationId "com.ardev.idroid"
-        minSdkVersion 26
-        targetSdkVersion 32
-        versionCode 1
-        versionName "1.0 beta"
+        applicationId rootProject.ext.appId
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 		multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
@@ -26,7 +26,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = '11'
     }
 	
 	buildFeatures {
@@ -66,8 +66,8 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            minifyEnabled true
-			shrinkResources true
+            minifyEnabled false
+			shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -80,7 +80,7 @@ implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 //modules
 //implementation project(path: ':build-tools:project')
-
+implementation project(path: ':common')
 
 //libraries
 implementation 'com.google.android.material:material:1.7.0'

@@ -10,7 +10,7 @@
      app:cardUseCompatPadding="false"
      android:clickable="true" 
      android:focusable="true" 
-     app:cardCornerRadius="16dp"
+     app:cardCornerRadius="8dp"
     app:strokeWidth="0dp"
     app:cardElevation="0dp">
    

@@ -30,9 +30,28 @@
     <string name="light_mode">Claro</string>
 
     <string name="dark_mode">Oscuro</string>
-
+<string name="dynamic_theme">Tema dinámico</string>
+    <string name="dynamic_theme_desc">Aplica un tema creado en el esquema de color de su fondo de pantalla</string>
      <string name="appearance">Apariencia</string>
 	<string name="create">Crear</string>
     <string name="delete">Eliminar proyecto</string>
     
+    <string name="about_desc">© 2022 Alexander Rotela</string>
+    <string name="about_version">Versión</string>
+    <string name="about_changelog_title">Registro de cambios</string>
+    <string name="about_license_title">Licencias de Código abierto</string>
+    <string name="about_author_title">Autor</string>
+    <string name="about_author_name">Alexander Rotela</string>
+    <string name="about_author_location">Paraguay</string>
+    <string name="about_social_title">Redes sociales</string>
+    <string name="about_facebook_label">Facebook</string>
+    <string name="about_instagram_label">Instagram</string>
+    <string name="about_twitter_label">Twitter</string>
+    <string name="about_telegram_label">Telegram</string>
+    <string name="about_support_title">Apoyar</string>
+    <string name="about_share_title">Compartir</string>
+    <string name="about_feedback_title">Enviar comentarios</string>
+    <string name="about_email_address">alexanderrotela2000@gmail.com</string>
+    <string name="about_more_apps_title">Más aplicaciones</string>
+    <string name="about_others">Otros</string>
 </resources>

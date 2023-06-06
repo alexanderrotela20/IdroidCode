@@ -78,10 +78,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-
-
-
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/drawer_toolbar"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +85,6 @@
                     android:layout_width="match_parent"
                     app:menu="@menu/menu_drawer"
                     android:layout_height="?attr/actionBarSize">
-
-
 
                     <com.ardev.component.widget.breadcrumbs.BreadcrumbsView
                         android:id="@+id/breadcrumbs_view"
@@ -115,8 +109,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/list"
                         android:nestedScrollingEnabled="false"
@@ -125,9 +117,6 @@
                         android:paddingBottom="?attr/actionBarSize"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-
-
-
 
                 </androidx.core.widget.NestedScrollView>
                 <TextView

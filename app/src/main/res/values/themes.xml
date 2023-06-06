@@ -1,162 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="Base.Theme.IdroidCode" parent="Theme.Material3.DayNight.NoActionBar">
+    	<item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+		<item name="android:windowTranslucentStatus">false</item>
+		<item name="android:windowTranslucentNavigation">false</item>
+		<item name="windowActionModeOverlay">true</item>
+		<item name="android:windowLightStatusBar" tools:ignore="NewApi">?isLightTheme</item>
+		<item name="android:windowLightNavigationBar" tools:ignore="NewApi">?isLightTheme</item>
+		<item name="android:statusBarColor" tools:ignore="NewApi">@android:color/transparent</item>
+		<item name="android:navigationBarColor">@android:color/black</item>
+		 <item name="android:navigationBarDividerColor" tools:targetApi="o_mr1">@null</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
+        <item name="android:overScrollMode">never</item>
+ 		<item name="toolbarStyle">@style/Widget.IdroidCode.Toolbar</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.IdroidCode</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat.M3</item>
+        <item name="textAppearanceListItem">?attr/textAppearanceBodyLarge</item>
+        <item name="textAppearanceListItemSecondary">?attr/textAppearanceBodySmall</item>
+		<item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
+    </style>
 
 
-  <style
-        name="Base.AppTheme"
-        parent="Theme.Material3.DayNight.NoActionBar">
-         
-         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorOnPrimary">@color/color_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/color_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/color_onPrimaryContainer</item>
-        <item name="colorSecondary">@color/color_secondary</item>
-        <item name="colorOnSecondary">@color/color_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/color_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/color_onSecondaryContainer</item>
-        <item name="colorTertiary">@color/color_tertiary</item>
-        <item name="colorOnTertiary">@color/color_onTertiary</item>
-        <item name="colorTertiaryContainer">@color/color_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/color_onTertiaryContainer</item>
-        <item name="colorError">@color/color_error</item>
-        <item name="colorErrorContainer">@color/color_errorContainer</item>
-        <item name="colorOnError">@color/color_onError</item>
-        <item name="colorOnErrorContainer">@color/color_onErrorContainer</item>
-        <item name="android:colorBackground">@color/color_background</item>
-        <item name="colorOnBackground">@color/color_onBackground</item>
-        <item name="colorSurface">@color/color_surface</item>
-        <item name="colorOnSurface">@color/color_onSurface</item>
-        <item name="colorSurfaceVariant">@color/color_surfaceVariant</item>
-        <item name="colorOnSurfaceVariant">@color/color_onSurfaceVariant</item>
-        <item name="colorOutline">@color/color_outline</item>
-        <item name="colorOnSurfaceInverse">@color/color_inverseOnSurface</item>
-        <item name="colorSurfaceInverse">@color/color_inverseSurface</item>
-<item name="colorPrimaryInverse">@color/color_inversePrimary</item>
+<style name="Theme.IdroidCode" parent="Base.Theme.IdroidCode"/>
 
+<style name="Theme.IdroidCode.AppTheme">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+    </style>
 
-
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-        <item name="windowActionModeOverlay">true</item>
-         
-        <item
-            name="android:windowLightStatusBar"
-            tools:ignore="NewApi">?isLightTheme</item>
-        <item
-            name="android:windowLightNavigationBar"
-            tools:ignore="NewApi">?isLightTheme</item>
-       <item
-            name="android:navigationBarColor"
-            tools:ignore="NewApi">?colorSurface</item>
-        <item
-            name="android:statusBarColor"
-            tools:ignore="NewApi">?colorSurface</item>
-        <item name="android:windowBackground">@color/color_background</item>
-            
-            
-         
- </style>
- 
- 
- 
-  <style
-        name="AppTheme"
-        parent="Base.AppTheme">
-        
-        <item
-            name="android:navigationBarColor"
-            tools:ignore="NewApi">@android:color/transparent</item>
-        <item
-            name="android:statusBarColor"
-            tools:ignore="NewApi">@android:color/transparent</item>
-			
- <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
-
-
- </style>
- 
- 
- <style
-        name="Fullscreen"
-        parent="Base.AppTheme">
-        	
+    <style name="Theme.IdroidCode.AppTheme.FullScreen">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
- </style>
- 
- <style
-        name="SplashTheme"
-        parent="Fullscreen">
-        <item
-            name="android:statusBarColor"
-            tools:ignore="NewApi">?colorSurface</item>
-             <item
-            name="android:navigationBarColor"
-            tools:ignore="NewApi">?colorSurface</item>
- <item name="android:windowBackground">@drawable/bg_splash</item>
-    </style>
- 
- 
- 
- 
-
-    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
     </style>
     
-    
-   <style name="ThemeOverlay.MaterialAlertDialog.NoRounded" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-    <item name="alertDialogStyle">@style/MaterialAlertDialog.NoRounded</item>
-    
-</style>
-
-   <style name="MaterialAlertDialog.NoRounded" parent="MaterialAlertDialog.Material3">
-    <item name="shapeAppearance">@style/NoRounded</item>
-     <item name="shapeAppearanceOverlay">@null</item>
-</style>
-
-
- 
- 
- 
-
-    
-
-<style name="MaterialTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
-	 
-	
-	
-    <style name="MaterialTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
-    
-    
-    
-    <style name="BreadcrumbsView">
-        <item name="crumbsTextColor">?colorSecondary</item>
-        <item name="crumbsSelectedTextColor">?colorOnSurfaceVariant</item>
-        <item name="crumbsTextSize">15sp</item>
-        <item name="crumbsPadding">0dp</item>
-    </style>
-    
-    
-   <style name="Shape" parent="">
-    <item name="cornerFamily">rounded</item>
-    <item name="cornerSize">50%</item>
+    <style name="Theme.IdroidCode.SplashScreen" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/md_theme_light_surface</item>
+    <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_animated</item>
+    <item name="windowSplashScreenAnimationDuration">200</item>
+    <item name="postSplashScreenTheme">@style/Theme.IdroidCode.AppTheme</item>
   </style>
-  
-   <style name="NoRounded" parent="">
-    <item name="cornerFamily">rounded</item>
-    <item name="cornerSize">4dp</item>
-    
-  </style>
-  
-  
-    
-  
-  
-    <style name="PopupAnimation">
-        <item name="android:windowEnterAnimation">@anim/popup_in</item>
-        <item name="android:windowExitAnimation">@anim/popup_out</item>
-    </style>
-  
+
 </resources>

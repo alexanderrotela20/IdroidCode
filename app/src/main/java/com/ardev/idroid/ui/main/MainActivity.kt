@@ -73,7 +73,7 @@ import com.google.android.material.tabs.TabLayout
 import com.ardev.component.widget.breadcrumbs.model.BreadcrumbItem
 import com.ardev.idroid.R
 
-class MainActivity(): BaseActivity<ActivityMainBinding, MainViewModel>(), ProjectManager.OnProjectOpenListener {
+class MainActivity(): BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMainBinding::inflate), ProjectManager.OnProjectOpenListener {
 	
 	
 private lateinit var mFilesAdapter: FileListAdapter 
@@ -86,7 +86,7 @@ var firstTimeInitTab = true
 var firstTimeInitList = true
 
 	
-	override val viewModel: MainViewModel by viewModels
+	val viewModel = MainViewModel by viewModels
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
 	override fun onCreate(bundle: Bundle) {

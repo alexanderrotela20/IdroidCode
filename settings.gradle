@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 rootProject.name= "IdroidCode"
 include ':app' 
 //include ':build-tools:project' 
+include ':common' 
 
